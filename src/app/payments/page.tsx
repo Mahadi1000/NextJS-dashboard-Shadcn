@@ -1,11 +1,11 @@
-import React from 'react'
-import { DataTable } from './_components/data-table';
-import { columns } from './_components/columns';
+import React from "react";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/columns";
 
 export interface Payment {
   id: string;
   amount: number;
-  status: string;
+  status: "pending" | "processing" | "success" | "failed";
   username: string;
   email: string;
 }
@@ -263,19 +263,52 @@ const getData = async (): Promise<Payment[]> => {
       username: "Anne Cruz",
       email: "annecruz@gmail.com",
     },
+    {
+      id: "728ed522a",
+      amount: 567,
+      status: "processing",
+      username: "Sarah Johnson",
+      email: "sarahjohnson@gmail.com",
+    },
+    {
+      id: "728ed523b",
+      amount: 1203,
+      status: "processing",
+      username: "Michael Brown",
+      email: "michaelbrown@gmail.com",
+    },
+    {
+      id: "728ed524c",
+      amount: 89,
+      status: "failed",
+      username: "Emma Wilson",
+      email: "emmawilson@gmail.com",
+    },
+    {
+      id: "728ed525d",
+      amount: 345,
+      status: "success",
+      username: "David Garcia",
+      email: "davidgarcia@gmail.com",
+    },
   ];
 };
 
 const page = async () => {
   const data = await getData();
   return (
-    <div>
-      <div className='mb-8 px-4 lg:px-8 xl:px-16 '>
-        <h1>Payment history</h1>
+    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Payment History</h2>
+          <p className="text-muted-foreground">
+            Manage and track all payment transactions
+          </p>
+        </div>
       </div>
       <DataTable data={data} columns={columns} />
     </div>
   );
-}
+};
 
-export default page
+export default page;
